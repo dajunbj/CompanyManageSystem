@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>社内システム</title>
+<link href="../../css/public.css" rel="stylesheet" />
+<link href="../../css/style.css" rel="stylesheet" />
+</head>
+<body>
+	<form th:action="@{/employee/employeelist/execute}" id="form" name="form"
+		method="post">
+		<div>${testVal}</div>
+		<header class="publicHeader"> </header>
+		<!--时间-->
+		<section class="publicTime">
+			<span id="time">2015年1月1日 11:11 星期一</span> <a href="#">メッセージ</a>
+		</section>
+		<!--主体内容-->
+		<section class="publicMian">
+			<div class="left"></div>
+			<div class="right">
+				<div class="location">
+					<strong>提示情報：</strong><span th:if="${errorMessage!=null}"
+						th:text="${errorMessage}"></span>
+				</div>
+				<div class="search">
+					<span> 名前： <input type="text" placeholder="请输入用户名" />
+					</span>
+					<!-- 					<div> -->
+					<!-- 						<select id="codeId" name="codeId"> -->
+					<!-- 							<option value="">お選んでください</option> -->
+					<!-- 							<option -->
+					<!-- 								th:selected="${courseDO.platformId eq cooperationPlatformDO.id}" -->
+					<!-- 								th:each="cooperationPlatformDO : ${cooperationPlatformDOList}" -->
+					<!-- 								th:value="${cooperationPlatformDO.id}" -->
+					<!-- 								th:text="${cooperationPlatformDO.platformName}"></option> -->
+					<!-- 						</select> -->
+					<!-- 					</div> -->
+					<span> <input type="submit" id="select" name="select"
+						value="検索" /><input type="submit" id="add" name="add"
+						value="新規" /><input type="submit" id="createInvoice"
+						name="createInvoice" value="書類" />
+					</span>
+					<!-- 非表示の明細ボタン -->
+					<input type="submit" name="read" id="read" style="display: none;" />
+					<input type="submit" name="update" id="update" style="display: none;"/>
+					<input type="submit" name="delete" id="delete" style="display: none;"/>
+				</div>
+				<!--用户-->
+				<table class="providerTable" cellpadding="0" cellspacing="0"
+					th:if="${dataForm != null}">
+					<tr class="firstTr">
+						<th width="10%" class="aaabbb">社員ID</th>
+						<th width="20%">名前</th>
+						<th width="10%">性別</th>
+						<th width="10%">生年月日</th>
+						<th width="10%">電話</th>
+<!-- 						<th width="10%">職種</th> -->
+						<th width="30%">アクション</th>
+					</tr>
+					<tr th:if="${!#lists.isEmpty(dataForm.results)}"
+						th:each="data,stat : ${dataForm.results}">
+						<td th:text="${data.employeeId}"></td>
+						<td th:text="${data.name}"></td>
+						<td th:text="${data.sex}"></td>
+						<td th:text="${data.birthday}"></td>
+						<td th:text="${data.phone}"></td>
+<!-- 						<td th:text="${data.roleId}"></td> -->
+						<td><a href="#"><img src="/img/read.png" alt="検索"
+								title="検索" onclick="clickRead(this);" /></a> <a href="#"><img
+								src="/img/update.png" alt="更新" title="更新"
+								onclick="clickUpdate(this);" /></a> <a href="#"><img
+								src="/img/delete.png" alt="削除" title="削除"
+								onclick="clickDelete(${data.employeeId}})" th:value="${data.employeeId}" /></a>
+								
+						</td>
+					</tr>
+				</table>
+
+			</div>
+		</section>
+
+		<!--点击删除按钮后弹出的页面-->
+		<div class="zhezhao"></div>
+		<div class="remove" id="removeUse">
+			<div class="removerChid">
+				<h2>提示</h2>
+				<div class="removeMain">
+					<p>你确定要删除该用户吗？</p>
+					<a href="#" id="yes">确定</a> <a href="#" id="no">取消</a>
+				</div>
+			</div>
+		</div>
+
+	</form>
+	<footer class="footer"> </footer>
+
+	<!-- 共通Js -->
+	<script type="text/javascript" th:src="@{../../js/jquery.js}"></script>
+	<script type="text/javascript" th:src="@{../../js/js.js}"></script>
+	<script type="text/javascript" th:src="@{../../js/time.js}"></script>
+	<script type="text/javascript" th:src="@{../../js/common.js}"></script>
+	<!-- 画面Js -->
+	<script type="text/javascript" th:src="@{../../js/employee/employeelist.js}"></script>
+</body>
+</html>

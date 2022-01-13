@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mapper.employee.EmployeeInfoMapper">
+
+	<select id="select"
+		parameterType="com.entity.employee.EmployeeInfoBean"
+		resultType="com.entity.employee.EmployeeInfoBean">
+		SELECT
+		employeeId,
+		name,
+		type,
+		sex,
+		birthday,
+		address,
+		phone,
+		joiningDate,
+		mail,
+		jobType,
+		jobLevel,
+		loginId,
+		password,
+		registrationDate,
+		updateDate,
+		companyId
+		FROM
+		employee_info
+		<where>
+			<if test="companyId != null">
+				companyId = #{companyId}
+			</if>
+			<if test="employeeId != null">
+				employeeId = #{employeeId}
+			</if>
+			<if test="mail != null">
+				mail = #{mail}
+			</if>
+		</where>
+	</select>
+
+	<insert id="insert"
+		parameterType="com.entity.employee.EmployeeInfoBean">
+		INSERT INTO employee_info (
+		employeeId,
+		name,
+		type,
+		sex,
+		birthday,
+		address,
+		phone,
+		joiningDate,
+		mail,
+		jobType,
+		jobLevel,
+		loginId,
+		password,
+		registrationDate,
+		updateDate,
+		companyId)
+		VALUES (
+		#{employeeId},
+		#{name},
+		#{type},
+		#{sex},
+		#{birthday},
+		#{address},
+		#{phone},
+		#{joiningDate},
+		#{mail},
+		#{jobType},
+		#{jobLevel},
+		#{loginId},
+		#{password},
+		#{registrationDate},
+		#{updateDate},
+		#{companyId}
+		)
+	</insert>
+
+</mapper>

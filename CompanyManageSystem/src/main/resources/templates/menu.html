@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>社内システム</title>
+<link href="../../css/public.css" rel="stylesheet" />
+<link href="../../css/style.css" rel="stylesheet" />
+</head>
+<body>
+	<form th:action="@{/menu/}" id="form" name="form" method="post">
+		<header class="publicHeader"> </header>
+		<!--时间-->
+		<section class="publicTime">
+			<span id="time">2015年1月1日 11:11 星期一</span> <a href="#">メッセージ</a>
+		</section>
+		<!--主体内容-->
+		<section class="publicMian">
+			<div class="left"></div>
+			<div class="right">
+				<img class="wColck" src="img/clock.jpg" alt="" />
+				<div class="wFont">
+					<h2>Admin</h2>
+					<p>子画面を表示する</p>
+					<span id="hours"></span>
+				</div>
+			</div>
+		</section>
+	</form>
+	<footer class="footer"> </footer>
+	
+	<script type="text/javascript" th:src="@{../js/jquery.js}"></script>
+	<script type="text/javascript" th:src="@{../js/js.js}"></script>
+	<script type="text/javascript" th:src="@{../js/time.js}"></script>
+	<script type="text/javascript" th:src="@{../js/common.js}"></script>
+	<!-- 画面Js -->
+	<script type="text/javascript" th:src="@{../js/menu.js}"></script>
+</body>
+</html>

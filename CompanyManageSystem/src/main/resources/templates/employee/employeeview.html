@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>社内システム</title>
+<link href="../../css/public.css" rel="stylesheet" />
+<link href="../../css/style.css" rel="stylesheet" />
+</head>
+<body>
+	<form th:action="@{/employee/employeeview/}" id="form" name="form"
+		method="post">
+		<header class="publicHeader"> </header>
+		<!--时间-->
+		<section class="publicTime">
+			<span id="time">2015年1月1日 11:11 星期一</span> <a href="#">メッセージ</a>
+		</section>
+		<!--主体内容-->
+		<section class="publicMian">
+			<div class="left"></div>
+			<div class="right">
+				<div class="location">
+					<strong>你现在所在的位置是:</strong> <span>用户管理页面 >> 用户信息查看页面</span>
+				</div>
+				<div class="providerView">
+					<p>
+						<strong>ログインID：</strong><span>hanlu</span>
+					</p>
+					<p>
+						<strong>名前：</strong><span>韩露</span>
+					</p>
+					<p>
+						<strong>性別：</strong><span>女</span>
+					</p>
+					<p>
+						<strong>生年月日：</strong><span>2011年2月1日</span>
+					</p>
+					<p>
+						<strong>電話：</strong><span>12345678906</span>
+					</p>
+					<p>
+						<strong>住所：</strong><span>北极</span>
+					</p>
+					<p>
+						<strong>職種：</strong><span>经理</span>
+					</p>
+
+					<!-- 					<a href="employeelist.html" onclick="history.back(-1)">戻る</a> -->
+					<input type="button" value="返回" onclick="history.back(-1)" />
+				</div>
+			</div>
+		</section>
+		<footer class="footer"> </footer>
+	</form>
+	<!-- 共通Js -->
+	<script type="text/javascript" th:src="@{../../js/jquery.js}"></script>
+	<script type="text/javascript" th:src="@{../../js/js.js}"></script>
+	<script type="text/javascript" th:src="@{../../js/time.js}"></script>
+	<script type="text/javascript" th:src="@{../../js/common.js}"></script>
+	<!-- 画面Js -->
+	<script type="text/javascript" th:src="@{../../js/employee/employeeview.js}"></script>
+
+</body>
+</html>
