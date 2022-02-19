@@ -2,19 +2,24 @@
 
 function clickRead(obj) {
 	//参照ボタンを押下
-	//	$("#clickRead").val(linkIndex);
+    $("#read").val(obj.getAttribute("value"));
 	$("#read").trigger("click");
 }
 function clickUpdate(obj) {
 	//更新ボタンを押下
-	//	$("#update").val(linkIndex);
+	$("#update").val(obj.getAttribute("value"));
 	$("#update").trigger("click");
 }
 function clickDelete(obj) {
-	var vl = $("#"+obj).val();
-	//削除ボタンを押下
-	$("#delete").val(vl);
-	$("#delete").trigger("click");
+	if (confirm("削除してもよろしいでしょうか")) {
+		//削除ボタンを押下
+		$("#delete").val(obj.getAttribute("value"));
+		$("#delete").trigger("click");
+		return true;
+	} else {
+		return false;
+	}
+
 }
 
 $(document).ready(function() {

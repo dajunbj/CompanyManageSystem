@@ -154,25 +154,33 @@ li {
 }
 
 .list li:nth-child(1) {
-	background: url("../img/zd.png") 0 center no-repeat;
-}
-
-.list li:nth-child(2) {
-	background: url("../img/gys.png") 0 center no-repeat;
-}
-
-.list li:nth-child(3) {
 	background: url("../img/yh.png") 0 center no-repeat;
 }
 
+.list li:nth-child(2) {
+	background: url("../img/company.png") 0 center no-repeat;
+}
+
+.list li:nth-child(3) {
+	background: url("../img/gys.png") 0 center no-repeat;
+}
+
 .list li:nth-child(4) {
-	background: url("../img/mm.png") 0 center no-repeat;
+	background: url("../img/zd.png") 0 center no-repeat;
 }
 
 .list li:nth-child(5) {
 	background: url("../img/tc.png") 0 center no-repeat;
 }
-
+.list li:nth-child(6) {
+	background: url("../img/tc.png") 0 center no-repeat;
+}
+.list li:nth-child(7) {
+	background: url("../img/tc.png") 0 center no-repeat;
+}
+.list li:nth-child(8) {
+	background: url("../img/bat.png") 0 center no-repeat;
+}
 .list li:hover {
 	background-color: #acd5f5;
 	border-radius: 4px;
@@ -217,8 +225,6 @@ li {
 }
 /*搜索信息栏*/
 .search {
-	height: 50px;
-	line-height: 50px;
 	background: #f6fafd;
 	padding-left: 24px;
 	color: #000;
@@ -283,7 +289,11 @@ li {
 }
 
 .search span {
-	margin-left: 10px;
+	width: 100px;
+	height: 30px;
+	outline: none;
+	padding-left: 10px;
+	border-radius: 4px;
 }
 
 .search select {
@@ -327,38 +337,6 @@ li {
 	background: #87c212 url("../img/add.png") 10px center no-repeat;
 }
 
-/* #read button { */
-/* 	margin-left: 20px; */
-/* 	width: 100px; */
-/* 	padding: 0 20px; */
-/* 	height: 30px; */
-/* 	border: 1px solid #7ba92c; */
-/* 	border-radius: 4px; */
-/* 	color: #fff; */
-/* 	font-weight: bold; */
-/* 	background: #87c212 url("../img/read.png") 10px center no-repeat; */
-/* } */
-
-/* #update button { */
-/* 	margin-left: 20px; */
-/* 	width: 100px; */
-/* 	padding: 0 20px; */
-/* 	height: 30px; */
-/* 	border: 1px solid #7ba92c; */
-/* 	border-radius: 4px; */
-/* 	color: #fff; */
-/* 	font-weight: bold; */
-/* 	background: #87c212 url("../img/update.png") 10px center no-repeat; */
-/* } */
-
-/* #delete button { */
-/* 	margin-left: 20px; */
-/* 	width: 100px; */
-/* 	padding: 0 20px; */
-/* 	height: 30px; */
-/* 	border: 1px solid #7ba92c; */
-/* 	border-radius: 4px; */
-/* 	color: #fff; */
-/* 	font-weight: bold; */
-/* 	background: #87c212 url("../img/delete.png") 10px center no-repeat; */
-/* } */
+.providerTable #img {
+	padding-left:10px;
+}

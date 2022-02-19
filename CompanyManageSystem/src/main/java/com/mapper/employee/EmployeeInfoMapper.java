@@ -42,4 +42,11 @@ public interface EmployeeInfoMapper {
 	 * @return 更新件数
 	 */
 	int delete(EmployeeInfoBean bean);
+	/**
+	 * ユーザー情報検索
+	 * 
+	 * @param user 検索用リクエストデータ
+	 * @return ユーザー情報
+	 */
+	List<EmployeeInfoBean> selectList(EmployeeInfoBean bean);
 }

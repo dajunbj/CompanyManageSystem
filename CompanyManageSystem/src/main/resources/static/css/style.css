@@ -82,7 +82,7 @@ input {
 }
 
 /*输入框得到焦点的效果*/
-.inputbox input:active, .providerAdd input:focus,
+.inputbox input:active, .providerDetail input:focus,
 .inputbox input:focus {
     border: 1px solid rgba(91, 90, 90, 0.7);
     background: rgba(238, 236, 240, 0.2);
@@ -222,30 +222,30 @@ input[type='reset']:active, input[type='reset']:focus, .providerView a:hover, .p
 }
 
 /*供应商管理页面-->供应商添加页面*/
-.providerAdd {
+.providerDetail {
     border: 1px solid #9ac70f;
     padding: 20px;
     margin: 20px;
 }
 
-.providerAdd form {
+.providerDetail form {
 
 }
 
-.providerAdd div {
+.providerDetail div {
     margin-top: 12px;
     margin-bottom: 12px;
     overflow-y:visible;
     height:auto;
 }
 
-.providerAdd label {
-    width: 200px;
+.providerDetail label {
+    width: 100px;
     display: inline-block;
     text-align: right;
 }
 
-.providerAdd input ,.providerAdd select{
+.providerDetail input ,.providerDetail select{
     width: 200px;
     height: 25px;
     line-height: 30px;
@@ -256,7 +256,7 @@ input[type='reset']:active, input[type='reset']:focus, .providerView a:hover, .p
     box-shadow: 1px 1px 1px #99afc4;
 }
 
-.providerAdd input:focus,.providerAdd select:focus {
+.providerDetail input:focus,.providerDetail select:focus {
     border: 1px solid #0e56a8;
     background: rgba(238, 236, 240, 0.2);
     -webkit-box-shadow: 0px 1px 4px 0px rgba(168, 168, 168, 0.9) inset;
@@ -264,37 +264,37 @@ input[type='reset']:active, input[type='reset']:focus, .providerView a:hover, .p
     box-shadow: 0px 1px 4px 0px rgba(168, 168, 168, 0.9) inset;
 }
 
-.providerAdd span {
+.providerDetail span {
     margin-left: 20px;
     color: #faca0d;
 }
 
 /*验证错误*/
-.providerAdd .error span {
+.providerDetail .error span {
     color: red;
 }
 
-.providerAdd .error input {
+.providerDetail .error input {
     border: 1px solid red;
 }
 
 /*验证成功*/
-.providerAdd .ok span {
+.providerDetail .ok span {
     color: green;
 }
 
-.providerAdd .ok input {
+.providerDetail .ok input {
     border: 1px solid green;
 }
 
-.providerAddBtn {
+.providerDetailBtn {
     margin-left: 240px;
     padding-top: 20px;
 }
 
-.providerAddBtn a ,
-.providerAddBtn input[type='submit'],
-.providerAddBtn input[type='button'] {
+.providerDetailBtn a ,
+.providerDetailBtn input[type='submit'],
+.providerDetailBtn input[type='button'] {
     display: inline-block;
     width: 100px;
     height: 30px;
@@ -310,15 +310,15 @@ input[type='reset']:active, input[type='reset']:focus, .providerView a:hover, .p
     vertical-align: top;
 }
 
-.providerAddBtn a:active,
-.providerAddBtn a:focus,
-.providerAddBtn a:hover,
-.providerAddBtn input[type='submit']:hover,
-.providerAddBtn input[type='submit']:focus{
+.providerDetailBtn a:active,
+.providerDetailBtn a:focus,
+.providerDetailBtn a:hover,
+.providerDetailBtn input[type='submit']:hover,
+.providerDetailBtn input[type='submit']:focus{
     background: linear-gradient(to bottom, #7aaed4, #578bb4, #406e99, #225792, #0d2d54);
 }
 
-.providerAdd input[type='radio']{
+.providerDetail input[type='radio']{
     width: 20px;
     height: 14px;
     line-height:12px;

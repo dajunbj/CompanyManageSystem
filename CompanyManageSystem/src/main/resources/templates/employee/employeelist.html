@@ -7,9 +7,7 @@
 <link href="../../css/style.css" rel="stylesheet" />
 </head>
 <body>
-	<form th:action="@{/employee/employeelist/execute}" id="form" name="form"
-		method="post">
-		<div>${testVal}</div>
+	<form th:action="@{/employee/employeelist}" method="POST" th:object="${form}">
 		<header class="publicHeader"> </header>
 		<!--时间-->
 		<section class="publicTime">
@@ -20,74 +18,78 @@
 			<div class="left"></div>
 			<div class="right">
 				<div class="location">
-					<strong>提示情報：</strong><span th:if="${errorMessage!=null}"
-						th:text="${errorMessage}"></span>
+					<strong>画面情報：</strong> <span>社員管理 >> 一覧画面</span> <br /> <span
+						th:if="${errorMessage!=null}" th:text="${errorMessage}"></span>
 				</div>
-				<div class="search">
-					<span> 名前： <input type="text" placeholder="请输入用户名" />
-					</span>
-					<!-- 					<div> -->
-					<!-- 						<select id="codeId" name="codeId"> -->
-					<!-- 							<option value="">お選んでください</option> -->
-					<!-- 							<option -->
-					<!-- 								th:selected="${courseDO.platformId eq cooperationPlatformDO.id}" -->
-					<!-- 								th:each="cooperationPlatformDO : ${cooperationPlatformDOList}" -->
-					<!-- 								th:value="${cooperationPlatformDO.id}" -->
-					<!-- 								th:text="${cooperationPlatformDO.platformName}"></option> -->
-					<!-- 						</select> -->
-					<!-- 					</div> -->
-					<span> <input type="submit" id="select" name="select"
-						value="検索" /><input type="submit" id="add" name="add"
-						value="新規" /><input type="submit" id="createInvoice"
-						name="createInvoice" value="書類" />
-					</span>
-					<!-- 非表示の明細ボタン -->
-					<input type="submit" name="read" id="read" style="display: none;" />
-					<input type="submit" name="update" id="update" style="display: none;"/>
-					<input type="submit" name="delete" id="delete" style="display: none;"/>
+				<div class="search" style="width:100%;display: inline-block;">
+					<table>
+						<tr>
+							<td>
+								名  前：
+							</td>
+							<td>
+								<input type="text" placeholder="社員名前をご入力ください。" />
+								<input type="submit" id="select" name="select" value="検索" />
+								<input type="submit" id="add" name="add" value="新規" />
+								<input type="submit" id="createInvoice" name="createInvoice" value="書類" />
+								<!-- 非表示の明細ボタン -->
+								<input type="submit" name="read" id="read" style="display: none;" />
+								<input type="submit" name="update" id="update" style="display: none;" />
+								<input type="submit" name="delete" id="delete" style="display: none;" />
+							</td>
+						</tr>
+						<tr>
+						    <td>
+							    社員区分：
+							</td>
+						    <td>
+								<div th:each="gender : ${form.genders}" style="display: inline-block;">
+									<input type="radio" name="gender" 
+									       th:id="${gender.id}" th:value="${gender.value}" th:field="*{selectGender}" 
+									       th:checked="${gender.value == form.selectGender}" placeholder="社員区分をご選択ください。"/>
+									<label th:for="${gender.id}" th:text="${gender.label}" style="width:30px;text-align:left;"></label>
+								</div>
+					         </td>
+						</tr>
+					</table>
 				</div>
-				<!--用户-->
-				<table class="providerTable" cellpadding="0" cellspacing="0"
-					th:if="${dataForm != null}">
-					<tr class="firstTr">
-						<th width="10%" class="aaabbb">社員ID</th>
-						<th width="20%">名前</th>
-						<th width="10%">性別</th>
-						<th width="10%">生年月日</th>
-						<th width="10%">電話</th>
-<!-- 						<th width="10%">職種</th> -->
-						<th width="30%">アクション</th>
-					</tr>
-					<tr th:if="${!#lists.isEmpty(dataForm.results)}"
-						th:each="data,stat : ${dataForm.results}">
-						<td th:text="${data.employeeId}"></td>
-						<td th:text="${data.name}"></td>
-						<td th:text="${data.sex}"></td>
-						<td th:text="${data.birthday}"></td>
-						<td th:text="${data.phone}"></td>
-<!-- 						<td th:text="${data.roleId}"></td> -->
-						<td><a href="#"><img src="/img/read.png" alt="検索"
-								title="検索" onclick="clickRead(this);" /></a> <a href="#"><img
-								src="/img/update.png" alt="更新" title="更新"
-								onclick="clickUpdate(this);" /></a> <a href="#"><img
-								src="/img/delete.png" alt="削除" title="削除"
-								onclick="clickDelete(${data.employeeId}})" th:value="${data.employeeId}" /></a>
-								
-						</td>
-					</tr>
-				</table>
-
+				<div style="padding-top: 10px;">
+					<!--用户-->
+					<table class="providerTable" 
+						th:if="${form != null}">
+						<tr class="firstTr">
+							<th width="10%" class="aaabbb">社員ID</th>
+							<th width="20%">名前</th>
+							<th width="10%">性別</th>
+							<th width="10%">生年月日</th>
+							<th width="10%">電話</th>
+							<th width="30%">アクション</th>
+						</tr>
+						<tr th:if="${!#lists.isEmpty(form.results)}"
+							th:each="data,stat : ${form.results}">
+							<td th:text="${data.employeeId}"></td>
+							<td th:text="${data.name}"></td>
+							<td th:text="${data.sex}"></td>
+							<td th:text="${data.birthday}"></td>
+							<td th:text="${data.phone}"></td>
+							<td><img src="/img/read.png" alt="参照" title="参照" onclick="clickRead(this);" th:value="${data.employeeId}" />
+							    <img src="/img/update.png" alt="更新" title="更新" onclick="clickUpdate(this)" th:value="${data.employeeId}" />
+							    <img src="/img/delete.png" alt="削除" title="削除" onclick="clickDelete(this)" th:value="${data.employeeId}" />
+							</td>
+						</tr>
+					</table>
+				</div>
 			</div>
 		</section>
 
-		<!--点击删除按钮后弹出的页面-->
+		<!--削除ボタンを押下後、ポップアップDIV画面が表示される-->
 		<div class="zhezhao"></div>
 		<div class="remove" id="removeUse">
 			<div class="removerChid">
 				<h2>提示</h2>
 				<div class="removeMain">
-					<p>你确定要删除该用户吗？</p>
-					<a href="#" id="yes">确定</a> <a href="#" id="no">取消</a>
+					<p>削除したらよろしいでしょうか</p>
+					<a href="#" id="yes">削除</a> <a href="#" id="no">キャンセル</a>
 				</div>
 			</div>
 		</div>
@@ -101,6 +103,7 @@
 	<script type="text/javascript" th:src="@{../../js/time.js}"></script>
 	<script type="text/javascript" th:src="@{../../js/common.js}"></script>
 	<!-- 画面Js -->
-	<script type="text/javascript" th:src="@{../../js/employee/employeelist.js}"></script>
+	<script type="text/javascript"
+		th:src="@{../../js/employee/employeelist.js}"></script>
 </body>
 </html>

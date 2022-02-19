@@ -6,4 +6,7 @@ public class UrlConst {
 	public final static String GOTO_USER_ADD = "/employee/employeeadd";
 	public final static String GOTO_USER_VIEW = "/employee/employeeview";
 	public final static String GOTO_USER_EIDT = "/employee/employeeedit";
+	
+
+	public final static String GOTO_SAMPLE = "/sample/sampleexecute";
 }

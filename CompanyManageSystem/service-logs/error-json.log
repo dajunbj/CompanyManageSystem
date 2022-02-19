@@ -1,0 +1,1 @@
+{"instant":{"epochSecond":1645242664,"nanoOfSecond":254894600},"thread":"main","level":"ERROR","loggerName":"com.temp.TestLog","message":"errorメッセージ","endOfBatch":false,"loggerFqcn":"org.apache.logging.log4j.spi.AbstractLogger","threadId":1,"threadPriority":5,"source":{"class":"com.temp.TestLog","method":"main","file":"TestLog.java","line":13,"classLoaderName":"app"}}

@@ -34,12 +34,49 @@
 			<if test="employeeId != null">
 				employeeId = #{employeeId}
 			</if>
-			<if test="mail != null">
-				mail = #{mail}
+			<if test="loginId != null">
+				loginId = #{loginId}
 			</if>
 		</where>
 	</select>
 
+	<select id="selectList"
+		parameterType="com.entity.employee.EmployeeInfoBean"
+		resultType="com.entity.employee.EmployeeInfoBean">
+		SELECT
+		employeeId,
+		name,
+		type,
+		sex,
+		case sex
+	      when 'M' then '男'
+	      else '女' end as sex,
+		birthday,
+		address,
+		phone,
+		joiningDate,
+		mail,
+		jobType,
+		jobLevel,
+		loginId,
+		password,
+		registrationDate,
+		updateDate,
+		companyId
+		FROM
+		employee_info
+		<where>
+			<if test="companyId != null">
+				companyId = #{companyId}
+			</if>
+			<if test="employeeId != null">
+				employeeId = #{employeeId}
+			</if>
+			<if test="loginId != null">
+				loginId = #{loginId}
+			</if>
+		</where>
+	</select>
 	<insert id="insert"
 		parameterType="com.entity.employee.EmployeeInfoBean">
 		INSERT INTO employee_info (
@@ -79,4 +116,29 @@
 		)
 	</insert>
 
+	<update id="update"
+			parameterType="com.entity.employee.EmployeeInfoBean">
+			update employee_info 
+			set name = #{name},
+			    type = #{type},
+			    sex = #{sex},
+			    birthday = #{birthday},
+			    address = #{address},
+			    phone = #{phone},
+			    joiningDate = #{joiningDate},
+			    mail = #{mail},
+			    jobType = #{jobType},
+			    jobLevel = #{jobLevel},
+			    loginId = #{loginId},
+			    password = #{password},
+			    updateDate = #{updateDate},
+			    companyId = #{companyId})
+			where employeeId = #{employeeId}
+	</update>
+
+	<delete id="delete"
+			parameterType="com.entity.employee.EmployeeInfoBean">
+			delete from employee_info 
+			where employeeId = #{employeeId}
+	</delete>
 </mapper>

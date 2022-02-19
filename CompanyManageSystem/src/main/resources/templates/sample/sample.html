@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>社内システム</title>
+<link href="../../css/public.css" rel="stylesheet" />
+<link href="../../css/style.css" rel="stylesheet" />
+<style type="text/css">
+.fieldError {
+	color: red
+}
+</style>
+</head>
+<body>
+	<form th:action="@{/sample/sampleexecute/execute}" method="POST" th:object="${form}">
+		<header class="publicHeader"> </header>
+		<!--时间-->
+		<section class="publicTime">
+			<span id="time">2015年1月1日 11:11 星期一</span> <a href="#">メッセージ</a>
+		</section>
+		<!--主体内容-->
+		<section class="publicMian ">
+
+			<div class="left"></div>
+			<div class="right">
+				<div class="location">
+					<strong>画面情報：</strong> <span>社員管理 >> 登録画面</span>
+				</div>
+				<div class="providerDetail">
+					<div style="display: none;">
+						<label>バッチID：</label>
+						<input name="batchId" type="text" th:value="${form.batchId}" th:field="*{batchId}"/>
+					</div>
+					<div class="providerDetailBtn">
+						<input type="submit" id="exportCsv" name="exportCsv" value="CSV出力"/>
+					</div>
+				</div>
+			</div>
+		</section>
+		<footer class="footer"> </footer>
+	</form>
+
+	<!-- 共通Js -->
+	<script type="text/javascript" th:src="@{../../js/jquery.js}"></script>
+	<script type="text/javascript" th:src="@{../../js/js.js}"></script>
+	<script type="text/javascript" th:src="@{../../js/time.js}"></script>
+	<script type="text/javascript" th:src="@{../../js/common.js}"></script>
+	<!-- 画面Js -->
+</body>
+</html>

@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.Utils.CmsUtils;
 import com.Utils.PdfUtil;
 import com.common.UrlConst;
 import com.controller.base.ControllerBase;
@@ -23,7 +25,7 @@ import com.service.employee.EmployeeService;
  */
 @Controller
 @RequestMapping(value = "/employee/employeelist")
-public class EmployeeListController implements ControllerBase {
+public class EmployeeListController extends ControllerBase {
 	private List<EmployeeInfoBean> lst;
 
 	@Autowired
@@ -32,10 +34,7 @@ public class EmployeeListController implements ControllerBase {
 	@Autowired
 	CommonMapper commonMapper;
 
-	private String testVal;
-
 	public EmployeeListController() {
-		testVal = "hello";
 	}
 
 	/**
@@ -44,78 +43,91 @@ public class EmployeeListController implements ControllerBase {
 	@RequestMapping(method = RequestMethod.GET)
 	public String init(Model model) {
 
-		model.addAttribute("form", new EmployeeForm());
+		EmployeeForm form = new EmployeeForm();
+
+		// 社員区分（ラジオボタン）
+		form.setGenders(CmsUtils.createGenders());
+		// 社員区分の初期値を設定する
+		form.setSelectGender("社員");
+
+		model.addAttribute("form", form);
+
 		return UrlConst.GOTO_USER_LIST;
-	}
-
-	/**
-	 * メニュークリック
-	 */
-	@RequestMapping(value = "/execute", params = "transitionTo", method = RequestMethod.POST)
-	public String transitionTo(@ModelAttribute("employeeForm") EmployeeForm form, Model model,
-			@RequestParam String transitionTo) {
-		// 画面データ初期化
-
-		return transitionTo;
 	}
 
 	/**
 	 * メニュー画面初期化
 	 */
-	@RequestMapping(value = "/execute", params = "select", method = RequestMethod.POST)
+	@RequestMapping(params = "select", method = RequestMethod.POST)
 	public String select(@ModelAttribute("employeeForm") EmployeeForm form, Model model) {
 		// 画面データ初期化
 		// 検索実施
-		form = employeeService.select(null);
+		EmployeeForm searchResultform = employeeService.select(form);
 
-		model.addAttribute("dataForm", form);
+		// 社員区分（ラジオボタン）
+		searchResultform.setGenders(CmsUtils.createGenders());
+
+		model.addAttribute("form", searchResultform);
 		return UrlConst.GOTO_USER_LIST;
 	}
 
 	/**
 	 * 新規ボタン
 	 */
-	@RequestMapping(value = "/execute", params = "add", method = RequestMethod.POST)
+	@RequestMapping(params = "add", method = RequestMethod.POST)
 	public String add(Model model) {
 
 		return "redirect:" + UrlConst.GOTO_USER_ADD;
 	}
-	
+
 	/**
 	 * 参照ボタン
 	 */
-	@RequestMapping(value = "/execute", params = "read", method = RequestMethod.POST)
-	public String read(Model model) {
-		return "redirect:" +UrlConst.GOTO_USER_VIEW;
+	@RequestMapping(params = "read", method = RequestMethod.POST)
+	public String read(RedirectAttributes redirectAttributes, @RequestParam String read) {
+
+		// 更新画面へ渡す引数：社員ＩＤ
+		redirectAttributes.addAttribute("selectedEmployeeId", read);
+		return "redirect:" + UrlConst.GOTO_USER_VIEW;
+
 	}
 
 	/**
 	 * 更新ボタン
 	 */
-	@RequestMapping(value = "/execute", params = "update", method = RequestMethod.POST)
-	public String update(Model model) {
-		return "redirect:" +UrlConst.GOTO_USER_EIDT;
+	@RequestMapping(params = "update", method = RequestMethod.POST)
+	public String update(RedirectAttributes redirectAttributes, @RequestParam String update) {
+
+		// 更新画面へ渡す引数：社員ＩＤ
+		redirectAttributes.addAttribute("selectedEmployeeId", update);
+		return "redirect:" + UrlConst.GOTO_USER_EIDT;
+
 	}
 
 	/**
 	 * 削除ボタン
 	 */
-	@RequestMapping(value = "/execute", params = "delete", method = RequestMethod.POST)
-	public String delete(@ModelAttribute("employeeForm") EmployeeForm form, Model model) {
+	@RequestMapping(params = "delete", method = RequestMethod.POST)
+	public String delete(RedirectAttributes redirectAttributes, @RequestParam String delete) {
+
+		EmployeeForm form = new EmployeeForm();
+		form.setEmployeeId(delete);
 		employeeService.delete(form);
-		return UrlConst.GOTO_USER_LIST;
+
+		return "redirect:" + UrlConst.GOTO_USER_LIST;
+
 	}
 
 	/**
 	 * 請求書作成を行う
 	 */
-	@RequestMapping(value = "/execute", params = "createInvoice", method = RequestMethod.POST)
+	@RequestMapping(params = "createInvoice", method = RequestMethod.POST)
 	public String createPdf(Model model) {
 		PdfUtil.printPdf("C:/work/pdf/template/PdfTemple.pdf");
 
 		model.addAttribute("dataList", lst);
 		model.addAttribute("errorMessage", "PDFファイルが作成されました。");
-		
+
 		return UrlConst.GOTO_USER_LIST;
 	}
 

@@ -1,21 +1,15 @@
 package com.controller.employee;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import com.Utils.PdfUtil;
 import com.common.UrlConst;
 import com.controller.base.ControllerBase;
-import com.entity.employee.EmployeeInfoBean;
 import com.form.employee.EmployeeForm;
 import com.mapper.common.CommonMapper;
 import com.service.employee.EmployeeService;
@@ -25,8 +19,10 @@ import com.service.employee.EmployeeService;
  */
 @Controller
 @RequestMapping(value = "/employee/employeeview")
-public class EmployeeViewController implements ControllerBase {
-	private List<EmployeeInfoBean> lst;
+public class EmployeeViewController extends ControllerBase {
+
+	@Autowired
+	EmployeeService employeeService;
 
 	@Autowired
 	EmployeeService userService;
@@ -37,32 +33,25 @@ public class EmployeeViewController implements ControllerBase {
 	/**
 	 * ユーザ画面初期化
 	 */
-	@RequestMapping(value = "", method = RequestMethod.GET)
-	private String init(Model model) {
+	@RequestMapping(method = RequestMethod.GET)
+	private String init(Model model, @ModelAttribute("selectedEmployeeId") String selectedEmployeeId) {
+
+		EmployeeForm form = new EmployeeForm();
+		form.setEmployeeId(selectedEmployeeId);
+
+		EmployeeForm initForm = employeeService.readInit(form);
+		model.addAttribute("employeeForm", initForm);
 
 		return UrlConst.GOTO_USER_VIEW;
 	}
 	
 	/**
-	 * メニュークリック
+	 * 「戻る」ボタンを押下する
 	 */
-	@RequestMapping(value = "", params = "transitionTo", method = RequestMethod.POST)
-	public String transitionTo(@ModelAttribute EmployeeForm form, BindingResult bindingResult, Model model, @RequestParam String transitionTo) {
+	@RequestMapping(params = "gotoEmployeeList", method = RequestMethod.POST)
+	public String gotoEmployeeList(@ModelAttribute("employeeForm") EmployeeForm form, BindingResult result,
+			Model model) {
 
-		return transitionTo;
+		return "redirect:" + UrlConst.GOTO_USER_LIST;
 	}
-
-	/**
-	 * 請求書作成を行う
-	 */
-	@PostMapping(value = "", params = "createInvoice")
-	public String createPdf(Model model) {
-		PdfUtil.printPdf("C:/work/pdf/template/PdfTemple.pdf");
-
-		model.addAttribute("dataList", lst);
-		model.addAttribute("errorMessage", "PDFファイルが作成されました。");
-		
-		return UrlConst.GOTO_USER_LIST;
-	}
-
 }

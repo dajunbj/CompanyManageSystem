@@ -9,9 +9,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import com.Utils.GeneralMstUtils;
+import com.Utils.CmsUtils;
+import com.Utils.ServiceUtils;
 import com.common.UrlConst;
 import com.controller.base.ControllerBase;
 import com.form.employee.EmployeeForm;
@@ -22,47 +22,57 @@ import com.service.employee.EmployeeService;
  */
 @Controller
 @RequestMapping(value = "/employee/employeeadd")
-public class EmployeeAddController implements ControllerBase {
+public class EmployeeAddController extends ControllerBase {
 
 	@Autowired
 	EmployeeService employeeService;
-
+	
 	@Autowired
-	GeneralMstUtils utils;
-
-	@RequestMapping(value = "", method = RequestMethod.GET)
+	ServiceUtils serviceUtils;
+	/**
+	 * 社員登録画面を初期化する
+	 */
+	@RequestMapping(method = RequestMethod.GET)
 	private String init(Model model) {
 
-		EmployeeForm initForm = employeeService.init(new EmployeeForm());
+		EmployeeForm initForm = employeeService.insertInit(new EmployeeForm());
 		model.addAttribute("employeeForm", initForm);
 
 		return UrlConst.GOTO_USER_ADD;
 	}
 
 	/**
-	 * メニュークリック
+	 * 保存ボタンを押下する
 	 */
-	@RequestMapping(value = "/execute", params = "transitionTo", method = RequestMethod.POST)
-	public String transitionTo(Model model, @RequestParam String transitionTo) {
-		// 画面データ初期化
-		return transitionTo;
-	}
-
-	@RequestMapping(value = "/execute", params = "add", method = RequestMethod.POST)
-	public String add(@ModelAttribute("employeeForm") @Valid EmployeeForm form, BindingResult result, Model model) {
+	@RequestMapping(params = "insert", method = RequestMethod.POST)
+	public String insert(@ModelAttribute("employeeForm") @Valid EmployeeForm form, BindingResult result, Model model) {
 		// 選択リスト{SEXY:性別}
-		form.setSexyList(utils.setSelectList("SEXY"));
+		form.setSexyList(serviceUtils.setSelectList("SEXY"));
 
 		// 選択リスト{JOB_TYPE:職種}
-		form.setJobTypeList(utils.setSelectList("JOB_TYPE"));
-
+		form.setJobTypeList(serviceUtils.setSelectList("JOB_TYPE"));
+		
+		//社員区分（ラジオボタン）
+		form.setGenders(CmsUtils.createGenders());
+		
 		if (result.hasErrors()) {
-			return UrlConst.GOTO_USER_ADD;
+
+			model.addAttribute("employeeForm", form);
+			return null;
 		}
 
-		employeeService.add(form);
+		employeeService.insert(form);
 
-		return UrlConst.GOTO_USER_LIST;
+		return "redirect:" + UrlConst.GOTO_USER_LIST;
 	}
+	
+	/**
+	 * 「戻る」ボタンを押下する
+	 */
+	@RequestMapping(params = "gotoEmployeeList", method = RequestMethod.POST)
+	public String gotoEmployeeList(@ModelAttribute("employeeForm") EmployeeForm form, BindingResult result, Model model) {
 
+		return "redirect:" + UrlConst.GOTO_USER_LIST;
+	}
+	
 }

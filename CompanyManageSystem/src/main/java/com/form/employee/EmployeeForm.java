@@ -6,7 +6,9 @@ import java.util.Map;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 
+import com.common.Gender;
 import com.entity.common.MCodeMstBean;
 import com.entity.employee.EmployeeInfoBean;
 
@@ -22,7 +24,6 @@ import lombok.Setter;
 @Data
 public class EmployeeForm {
 
-	private static final long serialVersionUID = 1L;
 	/* 検索欄の項目 */
 	private List<MCodeMstBean> codeList;
 
@@ -32,7 +33,6 @@ public class EmployeeForm {
 	/* 検索結果 */
 	private List<EmployeeInfoBean> results;
 
-	@NotEmpty
 	private String employeeId;
 
 	@NotEmpty
@@ -54,6 +54,9 @@ public class EmployeeForm {
 
 	@NotEmpty
 	private String address;
+	
+	//電話番号チェック
+	@Pattern(regexp = "^0\\d{10,10}$", message="{error.pattern.unmatch}")
 	private String phone;
 
 	@NotEmpty
@@ -68,5 +71,9 @@ public class EmployeeForm {
 	private Date registrationDate;
 	private Date updateDate;
 	private String companyId;
+
+	//社員区分
+	private List<Gender> genders;
+	private String selectGender;
 
 }
