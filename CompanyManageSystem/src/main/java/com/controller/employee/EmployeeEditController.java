@@ -79,7 +79,7 @@ public class EmployeeEditController extends ControllerBase {
 
 		employeeService.update(form);
 
-		return "redirect:" + UrlConst.GOTO_USER_LIST;
+		return UrlConst.GOTO_USER_LIST_REDIRECT;
 	}
 
 	/**
@@ -89,6 +89,6 @@ public class EmployeeEditController extends ControllerBase {
 	public String gotoEmployeeList(@ModelAttribute("employeeForm") EmployeeForm form, BindingResult result,
 			Model model) {
 
-		return "redirect:" + UrlConst.GOTO_USER_LIST;
+		return UrlConst.GOTO_USER_LIST_REDIRECT;
 	}
 }

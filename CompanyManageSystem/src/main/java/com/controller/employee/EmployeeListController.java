@@ -77,7 +77,7 @@ public class EmployeeListController extends ControllerBase {
 	@RequestMapping(params = "add", method = RequestMethod.POST)
 	public String add(Model model) {
 
-		return "redirect:" + UrlConst.GOTO_USER_ADD;
+		return UrlConst.GOTO_USER_ADD_REDIRECT;
 	}
 
 	/**
@@ -88,7 +88,7 @@ public class EmployeeListController extends ControllerBase {
 
 		// 更新画面へ渡す引数：社員ＩＤ
 		redirectAttributes.addAttribute("selectedEmployeeId", read);
-		return "redirect:" + UrlConst.GOTO_USER_VIEW;
+		return UrlConst.GOTO_USER_VIEW_REDIRECT;
 
 	}
 
@@ -100,7 +100,7 @@ public class EmployeeListController extends ControllerBase {
 
 		// 更新画面へ渡す引数：社員ＩＤ
 		redirectAttributes.addAttribute("selectedEmployeeId", update);
-		return "redirect:" + UrlConst.GOTO_USER_EIDT;
+		return UrlConst.GOTO_USER_EIDT_REDIRECT;
 
 	}
 
@@ -114,7 +114,7 @@ public class EmployeeListController extends ControllerBase {
 		form.setEmployeeId(delete);
 		employeeService.delete(form);
 
-		return "redirect:" + UrlConst.GOTO_USER_LIST;
+		return UrlConst.GOTO_USER_LIST_REDIRECT;
 
 	}
 

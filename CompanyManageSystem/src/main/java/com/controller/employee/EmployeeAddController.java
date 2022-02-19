@@ -63,7 +63,7 @@ public class EmployeeAddController extends ControllerBase {
 
 		employeeService.insert(form);
 
-		return "redirect:" + UrlConst.GOTO_USER_LIST;
+		return UrlConst.GOTO_USER_LIST_REDIRECT;
 	}
 	
 	/**
@@ -72,7 +72,7 @@ public class EmployeeAddController extends ControllerBase {
 	@RequestMapping(params = "gotoEmployeeList", method = RequestMethod.POST)
 	public String gotoEmployeeList(@ModelAttribute("employeeForm") EmployeeForm form, BindingResult result, Model model) {
 
-		return "redirect:" + UrlConst.GOTO_USER_LIST;
+		return UrlConst.GOTO_USER_LIST_REDIRECT;
 	}
 	
 }
