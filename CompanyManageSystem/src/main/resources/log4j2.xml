@@ -4,7 +4,7 @@
     <properties>
 <!-- 相対パス⇒logs -->
 <!-- 絶対パス⇒d:\logs\log4j2study_info.log -->
-        <property name="LOG_HOME">logs</property>
+        <property name="LOG_HOME">C:\Users\81804\Desktop\log</property>
     </properties>
     <Appenders>
         <!--*********************控制台日志***********************-->

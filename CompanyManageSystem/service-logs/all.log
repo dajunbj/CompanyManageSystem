@@ -1,3 +1,0 @@
-2022-02-19 12:51:04,245 DEBUG com.temp.TestLog [main] debugメッセージ
-2022-02-19 12:51:04,254 INFO com.temp.TestLog [main] infoメッセージ
-2022-02-19 12:51:04,254 ERROR com.temp.TestLog [main] errorメッセージ

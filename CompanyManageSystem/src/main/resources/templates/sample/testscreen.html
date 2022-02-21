@@ -12,7 +12,7 @@
 </style>
 </head>
 <body>
-	<form th:action="@{/sample/sampleexecute/execute}" method="POST" th:object="${form}">
+	<form th:action="@{/sample/testscreen}" method="POST" th:object="${form}"  enctype="multipart/form-data">
 		<header class="publicHeader"> </header>
 		<!--时间-->
 		<section class="publicTime">
@@ -24,15 +24,16 @@
 			<div class="left"></div>
 			<div class="right">
 				<div class="location">
-					<strong>画面情報：</strong> <span>社員管理 >> 登録画面</span>
+					<strong>画面情報：</strong> <span>社員管理 >> 登録画面</span> <br /> <span
+						th:if="${errorMessage!=null}" th:text="${errorMessage}" style="color: red;"></span>
 				</div>
+
 				<div class="providerDetail">
-					<div style="display: none;">
-						<label>バッチID：</label>
-						<input name="batchId" type="text" th:value="${form.batchId}" th:field="*{batchId}"/>
-					</div>
-					<div class="providerDetailBtn">
-						<input type="submit" id="exportCsv" name="exportCsv" value="CSV出力"/>
+					<div class="providerDetailBtn"  style="margin-left: 20px;margin-top: 20px;">
+						<input type="submit" id="downloadAllUserRoleCSV" name="downloadAllUserRoleCSV" value="CSV出力" />
+						 <br />
+						<input type="submit" id="upload" name="upload" value="CSV取込" />
+                        <input type="file" name="upload_file"  style="width:250px;"/>
 					</div>
 				</div>
 			</div>
@@ -46,5 +47,7 @@
 	<script type="text/javascript" th:src="@{../../js/time.js}"></script>
 	<script type="text/javascript" th:src="@{../../js/common.js}"></script>
 	<!-- 画面Js -->
+	<script type="text/javascript"
+		th:src="@{../../js/sample/testscreen.js}"></script>
 </body>
 </html>
