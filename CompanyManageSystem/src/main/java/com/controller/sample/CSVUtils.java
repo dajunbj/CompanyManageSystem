@@ -165,9 +165,10 @@ public class CSVUtils {
             //解析後のリスト
 			List<List<String>> values = new ArrayList<>();
 			int rowIndex = 0;
-
+			System.out.println("HeaderNames:" + parser.getHeaderNames());
+			System.out.println("RecordNumber:" + parser.getRecordNumber());
 			for (CSVRecord record : parser.getRecords()) {
-                //ヘッダをスキップする
+			    //ヘッダをスキップする
 				if (rowIndex == 0) {
 					rowIndex++;
 					continue;

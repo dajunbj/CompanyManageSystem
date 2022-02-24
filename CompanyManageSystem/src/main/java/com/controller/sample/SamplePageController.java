@@ -22,13 +22,13 @@ import com.service.sample.SampleService;
  * ログイン コントローラー
  */
 @Controller
-@RequestMapping(value = "/sample/testscreen")
-public class TestScreenController extends ControllerBase {
+@RequestMapping(value = "/sample/samplepage")
+public class SamplePageController extends ControllerBase {
 
 	@Autowired
 	SampleService service;
 
-	public TestScreenController() {
+	public SamplePageController() {
 	}
 
 	/**
@@ -40,12 +40,11 @@ public class TestScreenController extends ControllerBase {
 		return UrlConst.GOTO_SAMPLE;
 	}
 
-	@RequestMapping(params = "downloadAllUserRoleCSV", method = RequestMethod.POST)
+	@RequestMapping(params = "downloadAllUserRoleCSV",method = RequestMethod.POST)
 	public String downloadAllUserRoleCSV(HttpServletResponse response,Model model) throws IOException {
 		String[] head = new String[] { "社員ID", "勤務年月", "勤務年月日", "開始時間", "終了時間", "勤務時間", "ステータス", "登録年月日", "更新年月日" };
 		List<String[]> values = service.getValues();
 		
-//		values = null;
 		if (values == null || values.size() == 0) {
 			model.addAttribute("errorMessage", "検索結果がありません。");
 			return UrlConst.GOTO_SAMPLE;
@@ -62,7 +61,7 @@ public class TestScreenController extends ControllerBase {
 		return null;
 	}
 
-	@RequestMapping(params = "upload", method = RequestMethod.POST)
+	@RequestMapping(value="/upload",params = "upload", method = RequestMethod.POST)
     public String upload(@RequestParam("upload_file") MultipartFile multipartFile ,Model model) {
         try {
 
@@ -73,6 +72,8 @@ public class TestScreenController extends ControllerBase {
             }
             
             File file = CSVUtils.uploadFile(multipartFile);
+            
+            //9列まで取込む
             List<List<String>> csvList = CSVUtils.readCSV(file.getPath(), 9);
             service.registerValues(csvList);
             
